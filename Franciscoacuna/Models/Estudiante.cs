@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace Franciscoacuna.Models
 {
     [Table("Estudiante")]
-    public class Estudiante
+    public class Estudiante : Entidad
     {
         public string Nombres { get; set; }
         public string Apellidos { get; set; }
