@@ -59,7 +59,7 @@ namespace University.API.Controllers
 
                 // Extract and assign Current Principal and user
                 Thread.CurrentPrincipal = tokenHandler.ValidateToken(token, validationParameters, out securityToken);
-                HttpContext.Current.User = tokenHandler.ValidateToken(token, validationParameters, out securityToken);
+              //HttpContext.Current.User = tokenHandler.ValidateToken(token, validationParameters, out securityToken);
 
                 return base.SendAsync(request, cancellationToken);
             }
