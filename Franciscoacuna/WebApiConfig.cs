@@ -6,7 +6,11 @@ using System.Web;
 
 namespace Franciscoacuna
 {
-    public class WebApiConfig 
+    public static class WebApiConfig 
     {
+        public static void Register()
+        {
+
+        }
     }
 }

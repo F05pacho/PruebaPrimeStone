@@ -9,6 +9,8 @@ namespace Franciscoacuna.Models
     public class Direccion 
     {
         [Column("Direccion")]
+
+        public int Id { get; set; }
         public string StringDireccion { get; set; }
         public TipoDireccion TipoDireccion { get; set; }
         public int EstudianteId { get; set; }

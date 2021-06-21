@@ -13,6 +13,7 @@ namespace Franciscoacuna.Controllers
     [Route("api/[controller]")]
     public class EstudianteController : ControllerBase
     {
+
         private string connection = @"Server=localhost; Database=adminestudiantes; Uid=root;";
 
         [HttpGet]
@@ -22,8 +23,9 @@ namespace Franciscoacuna.Controllers
             using (var db = new MySqlConnection(connection))
             {
                 db.Open();
-                var sql = "select Nombres,apellidos,Genero from estudiante";
+                var sql = "select Id,Nombres,apellidos,Genero,FechaCreacion,FechaActualizacion,EstadoBorrado,FechaNacimiento from estudiante";
                 lst = (List<Models.Estudiante>)db.Query<Models.Estudiante>(sql);
+
             }
 
             return Ok(lst);
@@ -40,13 +42,14 @@ namespace Franciscoacuna.Controllers
             int result = 0;
             using (var db= new MySqlConnection(connection))
             {
-                var sql = "INSERT into estudiante()"+"values(@)";
+                var sql = "INSERT into estudiante(Nombres,apellidos,Genero,FechaCreacion,FechaActualizacion,EstadoBorrado,FechaNacimiento)" + 
+                    "values(@Nombres,@apellidos,@Genero,@FechaCreacion,@FechaActualizacion,@EstadoBorrado,@FechaNacimiento)";
             }
 
             return Ok(result);
         }
         /// <summary>
-        /// update the datas the table direccion
+        /// update 
         /// </summary>
         [HttpPut]
         public IActionResult updateEstudiante(Models.Estudiante model)
@@ -54,7 +57,7 @@ namespace Franciscoacuna.Controllers
             int result = 0;
             using (var db = new MySqlConnection(connection))
             {
-                var sql = "UPDATE estudiante set Nombres=@nombres ";
+                var sql = "UPDATE estudiante set Nombres=@nombres,@FechaActualizacion where Id=@id";
 
                 result = db.Execute(sql, model);
             }
@@ -68,7 +71,7 @@ namespace Franciscoacuna.Controllers
             int result = 0;
             using (var db = new MySqlConnection(connection))
             {
-                var sql = "DELETE from estudiante where id=@id ";
+                var sql = "DELETE from estudiante where Id=@id ";
 
                 result = db.Execute(sql, model);
 

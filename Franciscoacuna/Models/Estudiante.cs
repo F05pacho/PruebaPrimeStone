@@ -7,6 +7,7 @@ namespace Franciscoacuna.Models
     [Table("Estudiante")]
     public class Estudiante : Entidad
     {
+        public int Id { get; set; }
         public string Nombres { get; set; }
         public string Apellidos { get; set; }
         public DateTime FechaNacimento { get; set; }

@@ -22,7 +22,7 @@ namespace Franciscoacuna.Controllers
             using (var db = new MySqlConnection(connection))
             {
 
-                var sql = "SELECT Nombrecurso, CodigoCurso , estaBorrado, FechaCreacion, FechaActualizacion from Curso ";
+                var sql = "SELECT Nombrecurso, CodigoCurso , estadoBorrado, FechaCreacion, FechaActualizacion,FechaInicio, FechaFin from Curso ";
                 lst = (List<Models.Curso>)db.Query<Models.Curso>(sql);
 
             }
@@ -38,10 +38,11 @@ namespace Franciscoacuna.Controllers
             List<Models.Curso> lstid = null;
             using (var db = new MySqlConnection(connection))
             {
-                var sql = "INSERT into Curso()" + "values()";
-                var sql2 = "SELECT idcurso from Curso ";
-                lstid = (List<Models.Curso>)db.Query<Models.Curso>(sql);
-                var sql3 = "INSERT into EstudianteCurso()" + "values(idstu,lstid)";
+                var sql = "INSERT into Curso(NombreCurso,CodigoCurso,FechaActualizacion,FechaCreacion,EstadoBorrado)" + 
+                    "values(@NombreCurso,@CodigoCurso,@FechaActualizacion,@FechaCreacion,@EstadoBorrado)";
+                //var sql2 = "SELECT idcurso from Curso ";
+                //lstid = (List<Models.Curso>)db.Query<Models.Curso>(sql);
+                //var sql3 = "INSERT into EstudianteCurso()" + "values(idstu,lstid)";
             }
 
             return Ok(result);
@@ -53,7 +54,7 @@ namespace Franciscoacuna.Controllers
             int result = 0;
             using (var db = new MySqlConnection(connection))
             {
-                var sql = "UPDATE Curso set Nombrecurso=@nombrecurso";
+                var sql = "UPDATE Curso set Nombrecurso=@nombrecurso,@FechaActualizacion where id=@id";
                 result = db.Execute(sql, model);
             }
             return Ok(result);
